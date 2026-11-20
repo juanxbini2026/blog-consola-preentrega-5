@@ -1,0 +1,7 @@
+# Caché que genera Python al ejecutar
+__pycache__/
+*.pyc
+
+# Entornos virtuales
+venv/
+.venv/
