@@ -1,5 +1,8 @@
 """Datos base del blog: autor, estados, etiquetas y posts."""
 
+import json
+RUTA_POSTS = "posts.json"
+
 perfil_autor = {
     "nombre": "Juan Pérez",
     "email": "juan@blog.com",
@@ -42,3 +45,24 @@ posts = [
         "estado": "en_revisión"  # ERROR: estado no válido
     }
 ]
+def cargar_posts(ruta):
+    """Lee el archivo JSON y devuelve la lista de posts guardados."""
+    try:
+        with open(ruta, "r", encoding="utf-8") as archivo:
+            datos = json.load(archivo)
+    except FileNotFoundError:
+            print(f"No se encontró '{ruta}'. Se arranca con el blog vacío")
+            return []
+    return datos
+
+def guardar_posts(lista_de_dicts, ruta):
+    try:
+        """...."""
+    except TypeError:
+        """...."""
+
+    try: 
+        """"...."""
+    except OSError:
+        """...."""
+        
