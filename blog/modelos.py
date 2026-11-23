@@ -19,7 +19,10 @@ class Autor:
         }
 
 def reconstruir_autor(datos):
-    pass
+    """ Entra: Diccionario con los datos traidos del JSON 
+    Sale: un objeto Autor con los datos del diccionario """
+    
+    return Autor(datos["nombre"], datos["email"], datos["especialidad"], datos["bio"])
 
 
 class Post:
@@ -34,7 +37,7 @@ class Post:
     def __str__(self):
         pass
 
-    def a_dicionario(self):
+    def a_diccionario(self):
         pass
 
 
