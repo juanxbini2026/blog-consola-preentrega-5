@@ -19,10 +19,21 @@ class Autor:
         }
 
 def reconstruir_autor(datos):
-    """ Entra: Diccionario con los datos traidos del JSON 
-    Sale: un objeto Autor con los datos del diccionario """
+    """ 
+    - Entra: Diccionario con los datos traidos del JSON 
+    - Sale: un objeto Autor con los datos del diccionario
+    - Si los datos son invalidos sale: None """
+
+    if not isinstance(datos, dict):
+        print("Los datos del autor no son un diccionario")
+        return None
     
-    return Autor(datos["nombre"], datos["email"], datos["especialidad"], datos["bio"])
+    nombre_autor = datos.get("nombre", "")
+    if not isinstance(nombre_autor, str) or nombre_autor.strip() == "":
+        print("Error, el autor debe tener un nombre no vacío")
+        return None
+    
+    return Autor(nombre_autor, datos.get("email",""), datos.get("especialidad",""), datos.get("bio",""))
 
 
 class Post:
