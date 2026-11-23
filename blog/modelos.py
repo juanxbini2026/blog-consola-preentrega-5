@@ -119,15 +119,37 @@ def reconstruir_post(datos):
 
 class Blog:
     def __init__(self, posts):
+        """ Entra un objeto tipo Post como posts"""
         self.posts = posts
 
     def obtener_posts(self):
-        """..."""
-        pass
+        """Devuelve la lista de todos los post del blog"""
+        return self.posts
+        
 
     def buscar_por_titulo(self, termino):
-        """..."""
-        pass
+        """
+        Busca los posts cuyo título contiene el término, sin importar mayúsculas.
+
+        - Entra: el término de búsqueda como string.
+        - Sale: una lista con los posts encontrados; vacía si no hay
+          resultados o si el término está vacío.
+        """
+        if termino.strip() == "":
+            return []   
+        termino_minusculas = termino.lower()
+        resultados = []
+
+        for post in self.posts:
+           post_titulo = post.titulo
+           if termino_minusculas in post_titulo.lower():
+                resultados.append(post)
+
+        if len(resultados) > 0:
+            return resultados     
+        
+        return []
+        
 
     def filtrar_por_tag(self, tag):
         """..."""
