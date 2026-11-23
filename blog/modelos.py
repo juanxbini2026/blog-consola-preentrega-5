@@ -56,7 +56,17 @@ def reconstruir_autor(datos):
 
 
 class Post:
+    """Representa una publicación del blog, escrita por un Autor."""
+
     def __init__(self, id, titulo, contenido, autor, tags, estado):
+        """
+        Crea un post nuevo con sus datos.
+
+        - Entra: id (número), titulo, contenido, autor (un objeto Autor),
+          tags (lista de textos) y estado.
+        - Sale: nada; guarda los datos como atributos del objeto (self).
+          No valida los datos: eso lo hace validaciones.py.
+        """
         self.id = id
         self.titulo = titulo
         self.contenido = contenido
@@ -80,9 +90,9 @@ class Post:
         }
 
 def reconstruir_post(datos):
-    """  Arma un objeto Post con los datos del diccionario leído del JSON
+    """Arma un objeto Post con los datos del diccionario leído del JSON
 
-    - Entra: Diccionario con los datos traidos del JSON.
+    - Entra: Diccionario con los datos traídos del JSON.
     - Sale si no valida: None
     - Sale: un objeto Post y sus atributos son datos del diccionario 
     """
