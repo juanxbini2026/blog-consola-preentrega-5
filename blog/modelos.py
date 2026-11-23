@@ -179,12 +179,27 @@ class Blog:
         return posts_filtrados
 
     def agregar_post(self, post):
-        """..."""
-        pass
+        """
+        Suma un post nuevo al final de la lista de posts del blog.
+
+        - Entra: un objeto Post ya armado.
+        - Sale: nada; la lista self.posts crece en uno.
+        """
+        self.posts.append(post)
 
     def siguiente_id(self):
-        """..."""
-        pass
+        """
+        Calcula el id que le toca a un post nuevo: el mayor id actual + 1.
+
+        - Sale: un número entero. Si el blog está vacío o ningún post tiene
+          id numérico, devuelve 1. Los ids que no son int se ignoran.
+        """
+        mayor = 0
+        for post in self.posts:
+            if isinstance(post.id, int) and post.id > mayor:
+                mayor = post.id
+        return mayor + 1
+        
 
     def validar_posts(self):
         """
