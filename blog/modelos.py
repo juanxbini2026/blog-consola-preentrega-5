@@ -69,7 +69,7 @@ class Post:
         return f"[{self.id}] {self.titulo} - {self.autor} ({self.estado})"
         
     def a_diccionario(self):
-        """ Retorna los atributos del objeto en un diccionario apto JSON """
+        """ Retorna los atributos del objeto en un diccionario apto JSON"""
         return {
             "id" : self.id,
             "titulo": self.titulo,
@@ -80,8 +80,31 @@ class Post:
         }
 
 def reconstruir_post(datos):
-    """..."""
-    pass
+    """  Arma un objeto Post con los datos del diccionario leído del JSON
+
+    - Entra: Diccionario con los datos traidos del JSON.
+    - Sale si no valida: None
+    - Sale: un objeto Post y sus atributos son datos del diccionario 
+    """
+    if not isinstance(datos, dict):
+        print("'datos' no es un diccionario")
+        return None
+
+    if "autor" not in datos:
+        print("'autor' no esta incluido en datos.")
+        return None
+
+    autor_diccionario = datos.get("autor")
+    if not isinstance(autor_diccionario, dict):
+        print("el valor 'autor' de 'datos' no es un diccionario")
+        return None
+
+    autor_objeto = reconstruir_autor(autor_diccionario)
+    if autor_objeto is None:
+        print("'autor' no es un objeto de Autor")
+        return None
+    
+    return Post(datos.get("id", None),datos.get("titulo", ""), datos.get("contenido", ""), autor_objeto , datos.get("tags", []), datos.get("estado", ""))
 
 
 class Blog:
