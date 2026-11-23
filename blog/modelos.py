@@ -152,8 +152,31 @@ class Blog:
         
 
     def filtrar_por_tag(self, tag):
-        """..."""
-        pass
+        """
+        Filtra los posts que tienen el tag indicado, sin importar mayúsculas.
+
+        - Entra: el tag a buscar como string.
+        - Sale: una lista con los posts que tienen ese tag; vacía si no hay
+          resultados o si el tag está vacío. Los posts cuyos tags no son
+          una lista se saltean.
+        """
+        if tag.strip() == "":
+            return []
+
+        tag_minusculas = tag.lower()
+        posts_filtrados = []
+
+        for post in self.posts:
+            tags = post.tags
+            if not isinstance(tags, list):
+                continue  # tags mal cargados: se saltea el post
+
+            for tag_post in tags:
+                if isinstance(tag_post, str) and tag_post.lower() == tag_minusculas:
+                    posts_filtrados.append(post)
+                    break  # evita agregar el mismo post dos veces
+
+        return posts_filtrados
 
     def agregar_post(self, post):
         """..."""
