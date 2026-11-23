@@ -118,8 +118,15 @@ def reconstruir_post(datos):
 
 
 class Blog:
+    """Representa el blog completo: guarda los posts y centraliza las operaciones sobre ellos."""
+
     def __init__(self, posts):
-        """ Entra un objeto tipo Post como posts"""
+        """
+        Crea el blog con su lista de posts.
+
+        - Entra: posts, una lista de objetos Post (puede estar vacía).
+        - Sale: nada; guarda la lista en self.posts.
+        """
         self.posts = posts
 
     def obtener_posts(self):
@@ -214,6 +221,16 @@ class Blog:
         return validar_todos_posts(self.posts)
 
     def a_lista_de_diccionarios(self):
-        """..."""
-        pass
+        """
+        Convierte todos los posts del blog en diccionarios para guardarlos en el JSON.
+
+        - Sale: una lista nueva con un diccionario por post (cada uno con su
+          autor adentro). La lista self.posts no cambia.
+        """
+        lista_diccionario = []
+        for post in self.posts:
+            lista_diccionario.append(post.a_diccionario())
+
+        return lista_diccionario
+
     
