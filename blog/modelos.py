@@ -17,12 +17,12 @@ class Autor:
         self.bio = bio
 
     def __str__(self):
-        """Devuelve el nombre del autor para mostrarlo con print()."""
+        """Retorna el nombre del autor para mostrarlo con print()."""
         return self.nombre
 
     def a_diccionario(self):
         """
-        Convierte el autor en un diccionario para poder guardarlo en el JSON.
+        Retorna los atributos del objeto en un diccionario apto JSON
 
         - Entra: Objeto, es el propio autor.
         - Sale: Diccionario con los datos del Objeto.
@@ -65,11 +65,19 @@ class Post:
         self.estado = estado
 
     def __str__(self):
-        pass
-
+        """Retorna datos del post para mostrarlo con print()."""
+        return f"[{self.id}] {self.titulo} - {self.autor} ({self.estado})"
+        
     def a_diccionario(self):
-        pass
-
+        """ Retorna los atributos del objeto en un diccionario apto JSON """
+        return {
+            "id" : self.id,
+            "titulo": self.titulo,
+            "contenido": self.contenido,
+            "autor": self.autor.a_diccionario(),
+            "tags": self.tags,
+            "estado": self.estado
+        }
 
 def reconstruir_post(datos):
     """..."""
