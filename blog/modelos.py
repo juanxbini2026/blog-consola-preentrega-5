@@ -187,8 +187,16 @@ class Blog:
         pass
 
     def validar_posts(self):
-        """..."""
-        pass
+        """
+        Valida todos los posts del blog con las reglas de validaciones.py.
+
+        - Sale: una lista de tuplas (indice, es_valido, mensaje), una por post.
+        """
+        # Se importa acá adentro y no arriba del archivo para evitar un
+        # import circular: validaciones.py ya importa Autor y Post de este módulo.
+        from blog.validaciones import validar_todos_posts
+
+        return validar_todos_posts(self.posts)
 
     def a_lista_de_diccionarios(self):
         """..."""

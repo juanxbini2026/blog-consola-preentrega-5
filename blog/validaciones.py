@@ -1,65 +1,59 @@
 """Reglas de validación de los posts del blog."""
 
 from blog.datos import estados_post
+from blog.modelos import Autor, Post
+
 
 def validar_post(post):
     """
-    Valida que un post cumpla con la estructura y datos requeridos.
-    Retorna tupla (bool, mensaje).
+    Valida que un post tenga datos correctos.
+
+    - Entra: un objeto Post.
+    - Sale: tupla (es_valido, mensaje). es_valido es True o False y
+      el mensaje explica el primer problema encontrado.
     """
 
-    if not isinstance(post, dict):
-        return (False, "error - el post no es un diccionario")
+    if not isinstance(post, Post):
+        return (False, "error - no es un objeto Post")
 
-    claves_obligatorias = ["id", "titulo", "contenido", "autor", "tags", "estado"]
+    if not isinstance(post.id, int):
+        return (False, "error - el post no tiene un id numérico")
 
-    for clave in claves_obligatorias:
-        if clave not in post:
-            return (False, f"error - falta la clave '{clave}'")
-
-    titulo = post.get("titulo", "").strip()
-    if titulo == "":
+    if not isinstance(post.titulo, str) or post.titulo.strip() == "":
         return (False, "error - titulo no puede estar vacío")
 
-    contenido = post.get("contenido", "").strip()
-    if contenido == "":
+    if not isinstance(post.contenido, str) or post.contenido.strip() == "":
         return (False, "error - contenido no puede estar vacío")
 
-    if not isinstance(post.get("tags"), list):
+    if not isinstance(post.tags, list):
         return (False, "error - tags debe ser una lista")
 
-    if not isinstance(post.get("autor"), dict):
-        return (False, "error - autor debe ser un diccionario")
+    if not isinstance(post.autor, Autor):
+        return (False, "error - el autor debe ser un objeto Autor")
 
-    nombre_autor = post["autor"].get("nombre", "")
+    nombre_autor = post.autor.nombre
     if not isinstance(nombre_autor, str) or nombre_autor.strip() == "":
         return (False, "error - el autor debe tener un nombre no vacío")
 
-    estado = post.get("estado", "")
-    if estado not in estados_post:
-        return (False, f"error - estado '{estado}' no está permitido")
+    if post.estado not in estados_post:
+        return (False, f"error - estado '{post.estado}' no está permitido")
 
     return (True, "Post válido")
 
+
 def validar_todos_posts(lista_posts):
     """
-    Valida todos los posts y muestra un resumen de cada uno.
-    Retorna una lista de tuplas (indice, es_valido, mensaje).
+    Valida cada post de una lista.
+
+    - Entra: una lista de objetos Post.
+    - Sale: una lista de tuplas (indice, es_valido, mensaje), una por post.
+      No imprime nada: mostrar el resultado es trabajo del menú.
     """
 
     resultados = []
 
-    print("\n" + "="*60)
-    print("🔍 VALIDACIÓN DE POSTS")
-    print("="*60)
-
     for indice, post in enumerate(lista_posts, start=1):
         es_valido, mensaje = validar_post(post)
         resultados.append((indice, es_valido, mensaje))
-        if es_valido:
-            print(f"Post {indice}: ✓ {mensaje}")
-        else:
-            print(f"Post {indice}: ✗ {mensaje}")
 
-    print("="*60)
     return resultados
