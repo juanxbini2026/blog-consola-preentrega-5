@@ -52,8 +52,16 @@ def cargar_posts(ruta):
         with open(ruta, "r", encoding="utf-8") as archivo:
             datos = json.load(archivo)
     except FileNotFoundError:
-            print(f"No se encontró '{ruta}'. Se arranca con el blog vacío")
-            return []
+        print(f"No se encontró '{ruta}'. Se arranca con el blog vacío.")
+        return []
+    except json.JSONDecodeError:
+        print(f"'{ruta}' está vacío o mal escrito. Se arranca con el blog vacío.")
+        return []
+
+    if not isinstance(datos, list):
+        print(f"'{ruta}' no contiene una lista de posts. Se arranca con el blog vacío.")
+        return []
+
     posts_cargados = []
     for diccionario in datos:
         post = reconstruir_post(diccionario)
