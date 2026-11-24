@@ -1,7 +1,8 @@
-"""Datos base del blog: autor, estados, etiquetas y posts."""
+"""Persistencia del blog: carga y guarda los posts en posts.json, y los estados válidos."""
 
 import json
 from blog.modelos import reconstruir_post
+
 RUTA_POSTS = "posts.json"
 
 estados_post = ("borrador", "publicado", "archivado")

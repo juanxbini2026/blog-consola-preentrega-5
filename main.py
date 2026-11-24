@@ -3,7 +3,7 @@
 from blog.datos import cargar_posts, guardar_posts, RUTA_POSTS
 from blog.modelos import Autor, Post, Blog
 from blog.menu import mostrar_menu, pedir_texto, pedir_datos_post
-from blog.operaciones import listar_posts, mostrar_validacion, buscar_por_titulo, filtrar_por_tag
+from blog.operaciones import listar_posts, mostrar_validacion
 
 
 def guardar_blog(blog):
