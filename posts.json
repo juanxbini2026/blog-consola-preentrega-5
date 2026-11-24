@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "titulo": "Introducción a Python",
+        "contenido": "Python es un lenguaje versátil y fácil de aprender...",
+        "autor": {
+            "nombre": "Juan Pérez",
+            "email": "juan@blog.com",
+            "especialidad": "Python"
+        },
+        "tags": [
+            "python",
+            "tutorial"
+        ],
+        "estado": "publicado"
+    },
+    {
+        "id": 2,
+        "titulo": "Funciones en Python",
+        "contenido": "Las funciones nos permiten reutilizar código...",
+        "autor": {
+            "nombre": "Juan Pérez",
+            "email": "juan@blog.com",
+            "especialidad": "Python"
+        },
+        "tags": [
+            "python",
+            "desarrollo"
+        ],
+        "estado": "publicado"
+    },
+    {
+        "id": 3,
+        "titulo": "Bases de datos con Python",
+        "contenido": "Aprenderemos a conectar Python con SQL...",
+        "autor": {
+            "nombre": "Juan Pérez",
+            "email": "juan@blog.com",
+            "especialidad": "Python"
+        },
+        "tags": [
+            "python",
+            "bases_datos"
+        ],
+        "estado": "publicado"
+    },
+    {
+        "id": 4,
+        "titulo": "",
+        "autor": {
+            "nombre": "Juan Pérez",
+            "email": "juan@blog.com",
+            "especialidad": "Python"
+        },
+        "tags": "python",
+        "estado": "en_revisión"
+    }
+]
