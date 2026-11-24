@@ -140,7 +140,8 @@ class Blog:
 
         - Entra: el término de búsqueda como string.
         - Sale: una lista con los posts encontrados; vacía si no hay
-          resultados o si el término está vacío.
+          resultados o si el término está vacío. Los posts cuyo título
+          no es texto se saltean.
         """
         if termino.strip() == "":
             return []   
@@ -148,8 +149,10 @@ class Blog:
         resultados = []
 
         for post in self.posts:
-           post_titulo = post.titulo
-           if termino_minusculas in post_titulo.lower():
+            post_titulo = post.titulo
+            if not isinstance(post_titulo, str):
+                continue  # título mal cargado (ej. null en el JSON): se saltea el post
+            if termino_minusculas in post_titulo.lower():
                 resultados.append(post)
 
         if len(resultados) > 0:
