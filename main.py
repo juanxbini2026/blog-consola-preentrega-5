@@ -6,6 +6,22 @@ from blog.menu import mostrar_menu, pedir_texto, pedir_datos_post
 from blog.operaciones import listar_posts, mostrar_validacion, buscar_por_titulo, filtrar_por_tag
 
 
+def guardar_blog(blog):
+    """
+    Guarda todos los posts del blog en posts.json y avisa cómo salió.
+
+    - Entra: el objeto Blog con los posts actuales.
+    - Sale: True si se guardó, False si no se pudo.
+    Se usa desde la opción 6 (guardar) y la opción 7 (salir).
+    """
+    if guardar_posts(blog.a_lista_de_diccionarios(), RUTA_POSTS):
+        print(f"✅ Posts guardados en {RUTA_POSTS}.")
+        return True
+
+    print("❌ No se pudieron guardar los posts.")
+    return False
+
+
 if __name__ == "__main__":
 
     print("\n" + "="*60)
@@ -49,18 +65,16 @@ if __name__ == "__main__":
                               autor, datos["tags"], datos["estado"])
             blog.agregar_post(nuevo_post)
             print(f"✅ Post creado: {nuevo_post}")
-            print("   Recordá guardar con la opción 6 para que quede en posts.json.")
+            print("   Se guarda al salir (opción 7) o cuando elijas la opción 6.")
 
         elif opcion == 5:
             mostrar_validacion(blog.validar_posts())
 
         elif opcion == 6:
-            if guardar_posts(blog.a_lista_de_diccionarios(), RUTA_POSTS):
-                print("✅ Posts guardados en posts.json.")
-            else:
-                print("❌ No se pudieron guardar los posts.")
+            guardar_blog(blog)
 
         elif opcion == 7:
+            guardar_blog(blog)
             print("\n👋 ¡Hasta luego! Gracias por usar el sistema de blog.")
             print("="*60 + "\n")
             break
