@@ -32,6 +32,13 @@ def cargar_posts(ruta):
     return posts_cargados
 
 def guardar_posts(lista_de_dicts, ruta):
+    """
+    Guarda la lista de posts en el archivo JSON.
+
+    - Entra: la lista de posts ya convertidos a diccionario y la ruta del archivo.
+    - Sale: True si se guardó, False si algo falló (avisa con un mensaje).
+    Primero arma el texto y después escribe, así si falla no deja el archivo a medias.
+    """
     try:
         texto = json.dumps(lista_de_dicts, ensure_ascii=False, indent=4)
     except TypeError:
@@ -42,6 +49,9 @@ def guardar_posts(lista_de_dicts, ruta):
         with open(ruta, "w", encoding="utf-8") as archivo:
             archivo.write(texto)
     except OSError:
+        # OSError surgió de investigar qué tipos de errores puede dar un archivo:
+        # agrupa los problemas al escribir (falta de permisos, una carpeta que
+        # no existe, disco lleno), así no se cae el programa por ninguno.
         print(f"Error: no se pudo escribir '{ruta}'.")
         return False
 
