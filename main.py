@@ -1,8 +1,8 @@
 """Punto de entrada del blog por consola. Ejecutar con: python main.py"""
 
 from blog.datos import cargar_posts, guardar_posts, RUTA_POSTS
-from blog.modelos import Blog
-from blog.menu import mostrar_menu, pedir_texto
+from blog.modelos import Autor, Post, Blog
+from blog.menu import mostrar_menu, pedir_texto, pedir_datos_post
 from blog.operaciones import listar_posts, mostrar_validacion, buscar_por_titulo, filtrar_por_tag
 
 
@@ -43,13 +43,22 @@ if __name__ == "__main__":
                     print(f"No se encontraron posts con el tag '{tag}'.")
 
         elif opcion == 4:
-            pass
+            datos = pedir_datos_post()
+            autor = Autor(datos["nombre_autor"])
+            nuevo_post = Post(blog.siguiente_id(), datos["titulo"], datos["contenido"],
+                              autor, datos["tags"], datos["estado"])
+            blog.agregar_post(nuevo_post)
+            print(f"✅ Post creado: {nuevo_post}")
+            print("   Recordá guardar con la opción 6 para que quede en posts.json.")
 
         elif opcion == 5:
             mostrar_validacion(blog.validar_posts())
 
         elif opcion == 6:
-            pass
+            if guardar_posts(blog.a_lista_de_diccionarios(), RUTA_POSTS):
+                print("✅ Posts guardados en posts.json.")
+            else:
+                print("❌ No se pudieron guardar los posts.")
 
         elif opcion == 7:
             print("\n👋 ¡Hasta luego! Gracias por usar el sistema de blog.")
